@@ -79,8 +79,7 @@ final class FileItemPresentationCoordinator {
 
 extension FileItemPresentationCoordinator: ActionsViewControllerDelegate {
     func actionsViewControllerDidRequestShare(_ controller: ActionsViewController) {
-        let activityItem = UIActivityItemProvider(placeholderItem: item.url)
-        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [item.url], applicationActivities: nil)
         navigationController?.present(activityViewController, animated: true, completion: nil)
     }
 
