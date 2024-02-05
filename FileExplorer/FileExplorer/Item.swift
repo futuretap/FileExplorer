@@ -48,21 +48,24 @@ struct Item<T> {
         return (url.lastPathComponent as NSString).pathExtension
     }
     let modificationDate: Date
-    let type: ItemType
+	let type: ItemType
+	let fileSize: Int64
     let parse: (_ attributes: FileAttributes, _ data: Data?, _ items: [URL]?) -> T?
 
     private init?(url: URL, attributes: FileAttributes?, type: ItemType, parse: @escaping (FileAttributes, Data?, [URL]?) -> T?) {
         self.url = url
         self.type = type
         self.parse = parse
-
+		
         if let attributes = attributes {
-            self.modificationDate = attributes[FileAttributeKey.modificationDate] as! Date
+            self.modificationDate = attributes[.modificationDate] as! Date
+			self.fileSize = attributes[.size] as? Int64 ?? 0
         } else {
             var modificationDate: AnyObject?
             do {
-                try (url as NSURL).getResourceValue(&modificationDate, forKey: URLResourceKey.contentModificationDateKey)
-                self.modificationDate = modificationDate as! Date
+				let values = try (url as NSURL).resourceValues(forKeys: [.contentModificationDateKey, .fileSizeKey])
+				self.modificationDate = values[.contentModificationDateKey] as? Date ?? .distantPast
+				self.fileSize = values[.fileSizeKey] as? Int64 ?? 0
             } catch {
                 return nil
             }
@@ -112,10 +115,9 @@ extension Item {
     static func directory(at url: URL, attributes: FileAttributes? = nil) -> Item<Any>? {
         return Item<Any>(url: url, attributes: attributes) { (attributes: FileAttributes, urls: [URL]) in
             return urls.map({ url -> Any in
-                var isDirectoryValue: AnyObject?
-                try? (url as NSURL).getResourceValue(&isDirectoryValue, forKey: .isDirectoryKey)
-                let isDirectory = (isDirectoryValue as? Bool) ?? false
-                return Item.at(url, isDirectory: isDirectory)!
+				let values = try? (url as NSURL).resourceValues(forKeys: [.isDirectoryKey])
+				let isDirectory = (values?[.isDirectoryKey] as? Bool) ?? false
+				return Item.at(url, isDirectory: isDirectory)!
             }) as Any
         }
     }

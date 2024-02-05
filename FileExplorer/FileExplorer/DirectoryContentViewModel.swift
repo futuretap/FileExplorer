@@ -274,7 +274,9 @@ final class DirectoryContentViewModel {
 }
 
 struct ItemViewModel {
-    private let item: Item<Any>
+	fileprivate static var sizeFormatter = ByteCountFormatter()
+
+	private let item: Item<Any>
     private let specificationProvider: FileSpecificationProvider.Type
     private static let dateFormatter = DateFormatter()
 
@@ -286,7 +288,7 @@ struct ItemViewModel {
         self.item = item
         self.specificationProvider = specificationProvider
         self.title = item.name
-        self.subtitle = type(of: self).string(from: item.modificationDate)
+		self.subtitle = type(of: self).string(from: item.modificationDate) + ", " + ItemViewModel.sizeFormatter.string(fromByteCount: item.fileSize)
         self.accessoryType = item.type == .directory ? .disclosureIndicator : .detailButton
     }
 
