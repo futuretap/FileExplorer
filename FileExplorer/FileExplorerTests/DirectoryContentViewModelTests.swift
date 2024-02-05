@@ -51,7 +51,7 @@ final class MockedFileService: FileService {
     }
 
     func delete(items: [Item<Any>], completionBlock: @escaping (_ result: Result<Void>, _ removedItems: [Item<Any>], _ itemsNotRemovedDueToFailure: [Item<Any>]) -> Void) {
-        completionBlock(.success(), items, [Item<Any>]())
+        completionBlock(.success(()), items, [Item<Any>]())
     }
 }
 
@@ -76,7 +76,7 @@ final class DirectoryContentViewModelTests: XCTestCase {
         ]
 
         self.viewModelDelegate = MockedDirectoryContentViewModelDelegate()
-        let loadedItem = LoadedItem(item: directoryItem, attributes: FileAttributes(), resource: itemsInDirectory).cast() as LoadedDirectoryItem
+		let loadedItem = LoadedItem(item: directoryItem, attributes: FileAttributes(), resource: itemsInDirectory!).cast() as LoadedDirectoryItem
 
         viewModel = DirectoryContentViewModel(item: loadedItem, fileSpecifications: FileSpecifications(), configuration: Configuration())
         viewModel.delegate = self.viewModelDelegate
@@ -133,7 +133,7 @@ final class NonDiscDirectoryContentViewModelTests: XCTestCase {
 
         viewModelDelegate = makeViewModelDelegate()
 
-        loadedItem = LoadedItem(item: directoryItem, attributes: FileAttributes(), resource: itemsInDirectory).cast() as LoadedItem<[Item<Any>]>
+		loadedItem = LoadedItem(item: directoryItem, attributes: FileAttributes(), resource: itemsInDirectory!).cast() as LoadedItem<[Item<Any>]>
         fileService = MockedFileService()
         viewModel = makeViewModel(filteringConfiguration: FilteringConfiguration())
         viewModel.delegate = viewModelDelegate
@@ -703,9 +703,9 @@ extension NonDiscDirectoryContentViewModelTests {
 
     func indexPathsOfDirectories() -> [IndexPath] {
         let displayedItems = getDisplayedItems()
-        return displayedItems.flatMap {
+        return displayedItems.compactMap {
             if $0.type == .directory {
-                return IndexPath(item: displayedItems.index(of: $0)!, section: 0)
+				return IndexPath(item: displayedItems.firstIndex(of: $0)!, section: 0)
             } else {
                 return nil
             }}
@@ -717,9 +717,9 @@ extension NonDiscDirectoryContentViewModelTests {
 
     func indexPathsOfFiles() -> [IndexPath] {
         let displayedItems = getDisplayedItems()
-        return displayedItems.flatMap {
+        return displayedItems.compactMap {
             if $0.type == .file {
-                return IndexPath(item: displayedItems.index(of: $0)!, section: 0)
+				return IndexPath(item: displayedItems.firstIndex(of: $0)!, section: 0)
             } else {
                 return nil
             }}

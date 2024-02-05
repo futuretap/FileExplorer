@@ -60,7 +60,7 @@ extension Item {
 
     static func makeTestImage(at url: URL, modificationDate: Date = Date.testPastDate) -> Item<Any> {
         let image = UIImage.makeImage(withColor: UIColor.red)
-        let imageData = UIImagePNGRepresentation(image)!
+		let imageData = image.pngData()!
         try? imageData.write(to: url)
         return Item.file(at: url, attributes: [.modificationDate: modificationDate])!
     }
@@ -90,6 +90,6 @@ extension Item {
     }
 
     static func url(forResource resource: String, withExtension ext: String) -> URL {
-        return Bundle(for: type(of: ItemTests())).url(forResource: resource, withExtension: ext)!
+		return Bundle(for: ItemTests.self).url(forResource: resource, withExtension: ext)!
     }
 }

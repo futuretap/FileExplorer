@@ -39,13 +39,13 @@ final class ItemTests: XCTestCase {
         super.setUp()
 
         cacheDirectoryURL = URL.cacheDirectory
-        try? FileManager.default.createDirectory(at: cacheDirectoryURL, withIntermediateDirectories: true, attributes: [String: Any]())
+		try? FileManager.default.createDirectory(at: cacheDirectoryURL, withIntermediateDirectories: true, attributes: [:])
 
         directoryURL = cacheDirectoryURL.appendingPathComponent("directory")
-        try? FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: false, attributes: [String: Any]())
+		try? FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: false, attributes: [:])
 
         let image = UIImage.makeImage(withColor: UIColor.red)
-        let imageData = UIImagePNGRepresentation(image)!
+		let imageData = image.pngData()!
         imageFileURL = cacheDirectoryURL.appendingPathComponent("image.png")
         try? imageData.write(to: imageFileURL)
 

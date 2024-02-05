@@ -27,7 +27,7 @@ import Foundation
 
 extension FileManager {
     static func createDirectory(at url: URL) {
-        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: [String: Any]())
+		try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: [:])
     }
 
     static func createCacheDirectory() -> URL {
