@@ -27,7 +27,7 @@ import Foundation
 
 extension UIViewController {
     @nonobjc static var kActivityIndicatorKey = "fer_activityIndicatorView"
-    @objc var activityIndicatorView: UIActivityIndicatorView? {
+    @objc var ferActivityIndicatorView: UIActivityIndicatorView? {
         get {
             return objc_getAssociatedObject(self, &UIViewController.kActivityIndicatorKey) as? UIActivityIndicatorView
         }
@@ -37,25 +37,25 @@ extension UIViewController {
     }
     
     @objc func showLoadingIndicator() {
-        guard self.activityIndicatorView == nil else { return }
+        guard self.ferActivityIndicatorView == nil else { return }
         
-        let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+        let activityIndicatorView = UIActivityIndicatorView(style: .large)
         activityIndicatorView.color = .gray
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
         activityIndicatorView.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin, .flexibleBottomMargin, .flexibleRightMargin]
         view.addSubview(activityIndicatorView)
-        self.activityIndicatorView = activityIndicatorView
+        self.ferActivityIndicatorView = activityIndicatorView
         activityIndicatorView.startAnimating()
     }
     
     @objc func hideLoadingIndicator() {
-        self.activityIndicatorView?.stopAnimating()
+        self.ferActivityIndicatorView?.stopAnimating()
         UIView.animate(withDuration: 0.2, animations: {
-            self.activityIndicatorView?.alpha = 0.0
+            self.ferActivityIndicatorView?.alpha = 0.0
         }) { finished in
-            self.activityIndicatorView?.removeFromSuperview()
-            self.activityIndicatorView = nil
+            self.ferActivityIndicatorView?.removeFromSuperview()
+            self.ferActivityIndicatorView = nil
         }
     }
 }
