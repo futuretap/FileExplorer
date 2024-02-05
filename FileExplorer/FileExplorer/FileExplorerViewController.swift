@@ -26,7 +26,7 @@
 import UIKit
 
 /// The FileExplorerViewControllerDelegate protocol defines methods that your delegate object must implement to interact with the file explorer interface. The methods of this protocol notify your delegate when the user chooses files and/or directories, or finishes the file explorer presentation operation.
-public protocol FileExplorerViewControllerDelegate: class {
+public protocol FileExplorerViewControllerDelegate: AnyObject {
 
     /// Tells the delegate that the user finished presentation of the file explorer.
     ///

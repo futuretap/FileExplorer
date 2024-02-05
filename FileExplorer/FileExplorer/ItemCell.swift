@@ -58,7 +58,7 @@ final class ItemCell: UICollectionViewCell, Editable {
     private var containerViewLeadingConstraint: NSLayoutConstraint!
     private var containerViewTrailingConstraint: NSLayoutConstraint!
 
-    @objc var tapAction: () -> Void = {}
+    var tapAction: () -> Void = {}
     
     override init(frame: CGRect) {
         containerView = UIView()
@@ -151,26 +151,26 @@ final class ItemCell: UICollectionViewCell, Editable {
     private func setupAccessoryImageViewConstraints() {
         accessoryImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -15).isActive = true
         accessoryImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        accessoryImageView.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
-        accessoryImageView.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .vertical)
-        accessoryImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        accessoryImageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        accessoryImageView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        accessoryImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
     
     private func setupTitleLabelContstraints() {
         titleTextLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12.0).isActive = true
         titleTextLabel.trailingAnchor.constraint(equalTo: accessoryImageView.leadingAnchor, constant: -10.0).isActive = true
         titleTextLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12.0).isActive = true
-        titleTextLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        titleTextLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+        titleTextLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        titleTextLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
     private func setupSubtitleLabelConstraints() {
         subtitleTextLabel.leadingAnchor.constraint(equalTo: titleTextLabel.leadingAnchor).isActive = true
         subtitleTextLabel.trailingAnchor.constraint(equalTo: titleTextLabel.trailingAnchor).isActive = true
         subtitleTextLabel.topAnchor.constraint(equalTo: titleTextLabel.bottomAnchor, constant: 3.0).isActive = true
-        subtitleTextLabel.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh
+        subtitleTextLabel.setContentCompressionResistancePriority(.defaultHigh
             , for: .horizontal)
-        subtitleTextLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+        subtitleTextLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
 
     private func setupCheckmarkButtonConstraints() {
@@ -178,7 +178,7 @@ final class ItemCell: UICollectionViewCell, Editable {
         checkmarkButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 1.0).isActive = true
     }
     
-    @objc var title: String? {
+    var title: String? {
         get {
             return titleTextLabel.text
         }
@@ -187,7 +187,7 @@ final class ItemCell: UICollectionViewCell, Editable {
         }
     }
     
-    @objc var subtitle: String? {
+    var subtitle: String? {
         get {
             return subtitleTextLabel.text
         }
@@ -196,7 +196,7 @@ final class ItemCell: UICollectionViewCell, Editable {
         }
     }
     
-    @objc var iconImage: UIImage? {
+    var iconImage: UIImage? {
         get {
             return iconImageView.image
         }
@@ -216,7 +216,7 @@ final class ItemCell: UICollectionViewCell, Editable {
         }
     }
     
-    @objc var isEditing: Bool = false {
+    var isEditing: Bool = false {
         didSet {
             containerViewLeadingConstraint.constant = isEditing ? 38.0 : 0.0
             containerViewTrailingConstraint.constant = isEditing ? 38.0 : 0.0
@@ -224,7 +224,7 @@ final class ItemCell: UICollectionViewCell, Editable {
         }
     }
 
-    @objc func setEditing(_ editing: Bool, animated: Bool) {
+    func setEditing(_ editing: Bool, animated: Bool) {
         if animated {
             UIView.animate(withDuration: 0.2) {
                 self.isEditing = editing
@@ -253,7 +253,7 @@ final class ItemCell: UICollectionViewCell, Editable {
         }
     }
 
-    @objc var maximumIconSize: CGSize {
+    var maximumIconSize: CGSize {
         let max = Swift.max(Swift.max(iconImageView.frame.width, iconImageView.frame.height), LayoutConstants.iconWidth)
         return CGSize(width: max, height: max)
     }
@@ -318,7 +318,7 @@ final class CollectionViewHeader: UICollectionReusableView {
 }
 
 final class CollectionViewFooter: UICollectionReusableView {
-    @objc var leftInset: CGFloat = LayoutConstants.separatorLeftInset
+    var leftInset: CGFloat = LayoutConstants.separatorLeftInset
     private var separators = [SeparatorView]()
     
     override init(frame: CGRect) {

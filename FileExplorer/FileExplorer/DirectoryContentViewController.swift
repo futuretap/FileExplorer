@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol DirectoryContentViewControllerDelegate: class {
+protocol DirectoryContentViewControllerDelegate: AnyObject {
     func directoryContentViewController(_ controller: DirectoryContentViewController, didChangeEditingStatus isEditing: Bool)
     func directoryContentViewController(_ controller: DirectoryContentViewController, didSelectItem item: Item<Any>)
     func directoryContentViewController(_ controller: DirectoryContentViewController, didSelectItemDetails item: Item<Any>)
@@ -145,7 +145,7 @@ final class DirectoryContentViewController: UICollectionViewController {
             selectActionButton,
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             deleteActionButton
-            ].compactMap { $0 }
+        ].compactMap { $0 }
     }
 
     // MARK: Actions

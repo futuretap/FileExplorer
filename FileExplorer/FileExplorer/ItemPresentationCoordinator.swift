@@ -27,7 +27,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-protocol ItemPresentationCoordinatorDelegate: class {
+protocol ItemPresentationCoordinatorDelegate: AnyObject {
     func itemPresentationCoordinatorDidFinish(_ coordinator: ItemPresentationCoordinator)
     func itemPresentationCoordinator(_ coordinator: ItemPresentationCoordinator, didChooseItems items: [Item<Any>])
 }

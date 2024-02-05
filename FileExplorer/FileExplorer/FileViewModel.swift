@@ -47,7 +47,7 @@ final class FileViewModel {
             FileViewModel.makeFileSizeItem(fromAttributes: self.item.attributes),
             FileViewModel.makeCreationDateItem(fromAttributes: self.item.attributes),
             FileViewModel.makeModificationDateItem(fromAttributes: self.item.attributes)
-            ].compactMap { $0 }
+        ].compactMap { $0 }
     }
 
     func thumbnailImage(with size: CGSize) -> UIImage {
@@ -113,13 +113,13 @@ extension FileViewModel {
     
     fileprivate static func string(for fileAttributeKey: FileAttributeKey) -> String? {
         switch fileAttributeKey {
-        case FileAttributeKey.size:
+        case .size:
             return NSLocalizedString("Size", comment: "")
-        case FileAttributeKey.creationDate:
+        case .creationDate:
             return NSLocalizedString("Created", comment: "")
-        case FileAttributeKey.modificationDate:
+        case .modificationDate:
             return NSLocalizedString("Modified", comment: "")
-        case FileAttributeKey.type:
+        case .type:
             return NSLocalizedString("Kind", comment: "")
         default:
             return nil

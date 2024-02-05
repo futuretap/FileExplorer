@@ -54,7 +54,7 @@ final class DirectoryViewModel {
     }
 }
 
-protocol DirectoryViewControllerDelegate: class {
+protocol DirectoryViewControllerDelegate: AnyObject {
     func directoryViewController(_ controller: DirectoryViewController, didSelectItem item: Item<Any>)
     func directoryViewController(_ controller: DirectoryViewController, didSelectItemDetails item: Item<Any>)
     func directoryViewController(_ controller: DirectoryViewController, didChooseItems items: [Item<Any>])

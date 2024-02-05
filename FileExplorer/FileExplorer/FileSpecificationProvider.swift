@@ -28,7 +28,7 @@ import AVFoundation
 import AVKit
 
 /// Protocol providing an interface that describes file type.
-public protocol FileSpecificationProvider: class {
+public protocol FileSpecificationProvider: AnyObject {
 
     /// Extensions that are a part of described file type.
     static var extensions: [String] { get }

@@ -26,7 +26,7 @@
 import Foundation
 
 extension UICollectionView {
-    @objc func registerCell(ofClass cellClass: AnyClass) {
+    func registerCell(ofClass cellClass: AnyClass) {
         register(cellClass, forCellWithReuseIdentifier: String(describing: cellClass))
     }
     
@@ -41,7 +41,7 @@ extension UICollectionView {
         return cell
     }
     
-    @objc func registerFooter(ofClass viewClass: AnyClass) {
+    func registerFooter(ofClass viewClass: AnyClass) {
         register(viewClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: viewClass))
     }
     
@@ -49,7 +49,7 @@ extension UICollectionView {
         return dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: cellClass), for: indexPath) as! T
     }
     
-    @objc func registerHeader(ofClass viewClass: AnyClass) {
+    func registerHeader(ofClass viewClass: AnyClass) {
         register(viewClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: viewClass))
     }
     
@@ -67,7 +67,7 @@ extension UICollectionView {
     @nonobjc static var kToolbarKey = "toolbar"
     @nonobjc static var kToolbarBottomConstraint = "bottomConstraint"
 
-    @objc var isEditing: Bool {
+    var isEditing: Bool {
         get {
             return (objc_getAssociatedObject(self, &UICollectionView.kIsEditingKey) as? NSNumber)?.boolValue ?? false
         }
@@ -76,7 +76,7 @@ extension UICollectionView {
         }
     }
     
-    @objc var toolbar: UIToolbar? {
+    var toolbar: UIToolbar? {
         get {
             return (objc_getAssociatedObject(self, &UICollectionView.kToolbarKey)) as? UIToolbar
         }
@@ -94,7 +94,7 @@ extension UICollectionView {
         }
     }
     
-    @objc func setEditing(_ editing: Bool, animated: Bool) {
+    func setEditing(_ editing: Bool, animated: Bool) {
         for cell in visibleCells {
             guard let cell = cell as? Editable else {
                 continue

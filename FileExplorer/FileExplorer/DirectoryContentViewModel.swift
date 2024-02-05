@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol DirectoryContentViewModelDelegate: class {
+protocol DirectoryContentViewModelDelegate: AnyObject {
     func directoryViewModelDidChangeItemsList(_ viewModel: DirectoryContentViewModel)
     func directoryViewModelDidChange(_ viewModel: DirectoryContentViewModel)
     func directoryViewModel(_ viewModel: DirectoryContentViewModel, didSelectItem item: Item<Any>)

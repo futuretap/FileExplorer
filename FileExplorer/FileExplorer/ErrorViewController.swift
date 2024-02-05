@@ -25,7 +25,7 @@
 
 import UIKit
 
-protocol ErrorViewControllerDelegate: class {
+protocol ErrorViewControllerDelegate: AnyObject {
     func errorViewControllerDidFinish(_ controller: ErrorViewController)
 }
 

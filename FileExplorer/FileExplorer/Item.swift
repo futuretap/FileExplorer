@@ -95,14 +95,14 @@ extension Item: Equatable {
 }
 
 extension Item: Hashable {
-    var hashValue: Int {
-        return url.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
     }
 }
 
 typealias Extension = String
 
-/// Patter matching
+/// Pattern matching
 ///
 func ~=<T: Equatable>(pattern: [T], value: T) -> Bool {
     return pattern.contains { $0 == value }

@@ -26,7 +26,7 @@
 import Foundation
 
 extension UITableView {
-    @objc func registerCell(ofClass cellClass: AnyClass) {
+    func registerCell(ofClass cellClass: AnyClass) {
         register(cellClass, forCellReuseIdentifier: String(describing: cellClass))
     }
     
@@ -38,7 +38,7 @@ extension UITableView {
         return cell
     }
     
-    @objc func makeCell(with style: UITableViewCell.CellStyle) -> UITableViewCell {
+    func makeCell(with style: UITableViewCell.CellStyle) -> UITableViewCell {
         return UITableViewCell(style: style, reuseIdentifier: String(describing: UITableViewCell.self))
     }
 }

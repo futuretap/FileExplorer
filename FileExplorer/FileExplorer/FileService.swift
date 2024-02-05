@@ -26,7 +26,7 @@
 
 import Foundation
 
-protocol FileService: class {
+protocol FileService: Any {
     func load(item: Item<Any>, completionBlock: @escaping (Result<LoadedItem<Any>>) -> ())
     func delete(items: [Item<Any>], completionBlock: @escaping (_ result: Result<Void>, _ removedItems: [Item<Any>], _ itemsNotRemovedDueToFailure: [Item<Any>]) -> Void)
     

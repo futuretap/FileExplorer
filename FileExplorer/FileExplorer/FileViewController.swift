@@ -44,21 +44,21 @@ final class FileViewController: UIViewController {
 
         let imageView = ImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .vertical)
-        imageView.setContentCompressionResistancePriority(UILayoutPriority.defaultLow, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         let titleView = TitleView()
         titleView.translatesAutoresizingMaskIntoConstraints = false
         titleView.title = viewModel.title
-        titleView.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
-        titleView.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
+        titleView.setContentCompressionResistancePriority(.required, for: .vertical)
+        titleView.setContentCompressionResistancePriority(.required, for: .horizontal)
 
 
         let attributesView = AttributesView()
         attributesView.translatesAutoresizingMaskIntoConstraints = false
         attributesView.numberOfAttributes = viewModel.numberOfAttributes
-        attributesView.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
-        attributesView.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
+        attributesView.setContentCompressionResistancePriority(.required, for: .vertical)
+        attributesView.setContentCompressionResistancePriority(.required, for: .horizontal)
         for (index, label) in attributesView.attributeNamesColumn.labels.enumerated() {
             let attributeViewModel = viewModel.attribute(for: index)
             label.text = attributeViewModel.attributeName
@@ -126,7 +126,7 @@ final class ImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc var customImage: UIImage? {
+    var customImage: UIImage? {
         get {
             return customImageView.image
         }
@@ -150,7 +150,7 @@ final class TitleView: UIView {
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -1.0).isActive = true
         titleLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -20.0).isActive = true
-        titleLabel.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
+        titleLabel.setContentHuggingPriority(.required, for: .vertical)
         titleLabel.numberOfLines = 1
         titleLabel.lineBreakMode = .byTruncatingTail
 
@@ -175,7 +175,7 @@ final class TitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc var title: String? {
+    var title: String? {
         get {
             return titleLabel.text
         }
@@ -215,7 +215,7 @@ final class AttributesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc var numberOfAttributes: Int = 0 {
+    var numberOfAttributes: Int = 0 {
         didSet {
             attributeNamesColumn.numberOfAttributes = numberOfAttributes
             for label in attributeNamesColumn.labels {
@@ -237,7 +237,7 @@ final class AttributesView: UIView {
 }
 
 final class AttributesColumnView: UIView {
-    @objc var labels = [UILabel]()
+    var labels = [UILabel]()
     private let stackView = UIStackView()
 
     override init(frame: CGRect) {
@@ -255,7 +255,7 @@ final class AttributesColumnView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc var numberOfAttributes: Int = 0 {
+    var numberOfAttributes: Int = 0 {
         didSet {
             for view in labels {
                 stackView.removeArrangedSubview(view)

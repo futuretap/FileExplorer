@@ -25,7 +25,7 @@
 
 import UIKit
 
-protocol ActionsViewControllerDelegate: class {
+protocol ActionsViewControllerDelegate: AnyObject {
     func actionsViewControllerDidRequestRemoval(_ controller: ActionsViewController)
     func actionsViewControllerDidRequestShare(_ controller: ActionsViewController)
 }

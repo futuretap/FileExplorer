@@ -25,7 +25,7 @@
 
 import Foundation
 
-protocol DirectoryItemPresentationCoordinatorDelegate: class {
+protocol DirectoryItemPresentationCoordinatorDelegate: AnyObject {
     func directoryItemPresentationCoordinator(_ coordinator: DirectoryItemPresentationCoordinator, didSelectItem item: Item<Any>)
     func directoryItemPresentationCoordinator(_ coordinator: DirectoryItemPresentationCoordinator, didSelectItemDetails item: Item<Any>)
     func directoryItemPresentationCoordinator(_ coordinator: DirectoryItemPresentationCoordinator, didChooseItems items: [Item<Any>])
