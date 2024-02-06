@@ -148,7 +148,7 @@ extension DirectoryViewController: UISearchBarDelegate {
 
 extension DirectoryViewController: DirectoryContentViewControllerDelegate {
     @objc func directoryContentViewController(_ controller: DirectoryContentViewController, didChangeEditingStatus isEditing: Bool) {
-        searchController.searchBar.isEnabled = !isEditing
+        searchController.searchBar.ferIsEnabled = !isEditing
     }
 
     func directoryContentViewController(_ controller: DirectoryContentViewController, didSelectItem item: Item<Any>) {
